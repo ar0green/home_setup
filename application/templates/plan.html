@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}План погашения{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Ваш план погашения</h1>
+
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    <a href="/" class="btn btn-primary">Вернуться назад</a>
+{% else %}
+    {% for month in plan %}
+        <h2 class="mt-4">Месяц {{ month.month }}</h2>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Название кредита</th>
+                    <th>Процентная ставка (% годовых)</th>
+                    <th>Начисленные проценты</th>
+                    <th>Обязательный платеж</th>
+                    <th>Дополнительный платеж</th>
+                    <th>Итого платеж</th>
+                    <th>Остаток долга</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in month.payments %}
+                <tr>
+                    <td>{{ payment.loan_name }}</td>
+                    <td>{{ payment.interest_rate }}</td>
+                    <td>{{ payment.interest_amount }}</td>
+                    <td>{{ payment.minimum_payment }}</td>
+                    <td>{{ payment.extra_payment }}</td>
+                    <td>{{ payment.total_payment }}</td>
+                    <td>{{ payment.remaining_balance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endif %}
+{% endblock %}

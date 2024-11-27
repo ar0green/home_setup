@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Расходы{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Расходы</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Сумма</th>
+            <th>Дата</th>
+            <th>Категория</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.category.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

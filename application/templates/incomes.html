@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Доходы{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Доходы</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Сумма</th>
+            <th>Дата</th>
+            <th>Категория</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for income in incomes %}
+        <tr>
+            <td>{{ income.amount }}</td>
+            <td>{{ income.date }}</td>
+            <td>{{ income.category.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
