@@ -1,9 +1,4 @@
 def calculate_optimal_plan(income, expenses, loans, strategy='snowball'):
-    # Пример логики, упрощенной для демо
-    # Предположим, что income, expenses - float
-    # loans - список словарей: {name, balance, payment, interest_rate}
-
-    # Проверим обязательные платежи
     total_payments = sum(l['payment'] for l in loans)
     available_budget = income - expenses
 
@@ -13,7 +8,6 @@ def calculate_optimal_plan(income, expenses, loans, strategy='snowball'):
     plan = []
     month = 1
 
-    # Сортируем кредиты по стратегии
     def sort_key(loan):
         if strategy == 'snowball':
             return loan['balance']
@@ -27,7 +21,6 @@ def calculate_optimal_plan(income, expenses, loans, strategy='snowball'):
 
         total_payments = sum(l['payment'] for l in loans if l['balance'] > 0)
         free_cash = available_budget - total_payments
-        # Дополнительный платеж к первому непогашенному кредиту
         for loan in loans:
             if loan['balance'] <= 0:
                 continue
@@ -35,7 +28,6 @@ def calculate_optimal_plan(income, expenses, loans, strategy='snowball'):
             if loan == next((x for x in loans if x['balance'] > 0), None):
                 extra = min(free_cash, loan['balance'] - loan['payment'])
                 payment += extra
-            # Погашаем
             loan['balance'] -= payment
             month_info['payments'].append({
                 'loan_name': loan['name'],
